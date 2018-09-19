@@ -4,7 +4,6 @@ from django.utils.text import slugify
 
 from django_countries.fields import CountryField
 
-
 CONTACT_TYPES = (
     ('phone', _('Phone')),
     ('email', _('E-Mail')),
@@ -13,7 +12,6 @@ CONTACT_TYPES = (
 
 
 class Category(models.Model):
-
     class Meta:
         verbose_name_plural = "categories"
 
@@ -25,7 +23,6 @@ class Category(models.Model):
 
 
 class Directory(models.Model):
-
     class Meta:
         verbose_name_plural = "directories"
 
@@ -54,8 +51,10 @@ class Directory(models.Model):
 
 
 class ContactInfo(models.Model):
-
-    directory = models.ForeignKey(Directory, verbose_name=_('Service provider'), related_name='contacts')
+    directory = models.ForeignKey(
+        to = Directory,
+        verbose_name=_('Service provider'),
+        related_name='contacts', on_delete=models.CASCADE())
     type = models.CharField(_('Type'), max_length=5, choices=CONTACT_TYPES)
     value = models.CharField(_('Value'), max_length=400)
 
@@ -64,15 +63,32 @@ class ContactInfo(models.Model):
 
 
 class Address(models.Model):
-
     class Meta:
         verbose_name_plural = "addresses"
 
-    directory = models.ForeignKey(Directory, verbose_name=('Service provider'), related_name='addresses')
-    street = models.CharField(_('Street address'), max_length=255)
-    street2 = models.CharField(_('Second line'), max_length=255, blank=True, null=True)
+    directory = models.ForeignKey(
+        Directory,
+        verbose_name=('Service provider'),
+        related_name='addresses', on_delete=models.CASCADE)
+
+    street = models.CharField(
+        _('Street address'),
+        max_length=255)
+
+    street2 = models.CharField(
+        _('Second line'),
+        max_length=255,
+        blank=True,
+        null=True)
+
     city = models.CharField(_('City'), max_length=100)
-    postal_code = models.CharField(_('postal_code'), max_length=10, blank=True, null=True)
+
+    postal_code = models.CharField(
+        _('postal_code'),
+        max_length=10,
+        blank=True,
+        null=True)
+
     country = CountryField(verbose_name=_('Country'))
 
     longitude = models.FloatField(_('Longitude'), blank=True, null=True)
