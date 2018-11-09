@@ -4,6 +4,7 @@ celery
 django-debug-toolbar
 django-debug-toolbar-template-timings
 django-jquery-js
+django-formset-js
 django-webtest
 factory-boy
 django-countries
