@@ -15,12 +15,12 @@ urlpatterns = [
     # Examples:
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^$', DirectoryListView.as_view(), name='directory'),
     url(r'^new/$', DirectoryCreateView.as_view(), name='directory_create'),
     url(r'^view/(?P<slug>[\w-]+)/$', DirectoryDetailView.as_view(), name='directory_detail'),
 
     url(r'^comments/', include(comments_urls)),
-    url(r'^ratings/', include(star_ratings_urls, namespace='ratings', app_name='ratings')),
+    url(r'^ratings/', include(star_ratings_urls, namespace='ratings')),
     url(r'^accounts/', include(auth_urls)),
 ]

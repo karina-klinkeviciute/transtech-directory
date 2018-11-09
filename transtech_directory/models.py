@@ -52,9 +52,10 @@ class Directory(models.Model):
 
 class ContactInfo(models.Model):
     directory = models.ForeignKey(
-        to = Directory,
+        to=Directory,
         verbose_name=_('Service provider'),
-        related_name='contacts', on_delete=models.CASCADE())
+        related_name='contacts',
+        on_delete=models.CASCADE)
     type = models.CharField(_('Type'), max_length=5, choices=CONTACT_TYPES)
     value = models.CharField(_('Value'), max_length=400)
 
@@ -69,7 +70,8 @@ class Address(models.Model):
     directory = models.ForeignKey(
         Directory,
         verbose_name=('Service provider'),
-        related_name='addresses', on_delete=models.CASCADE)
+        related_name='addresses',
+        on_delete=models.CASCADE)
 
     street = models.CharField(
         _('Street address'),
