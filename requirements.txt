@@ -1,9 +1,9 @@
 Django
 django-crispy-forms
 celery
-django-cookie-law
 django-debug-toolbar
 django-debug-toolbar-template-timings
+django-jquery-js
 django-webtest
 factory-boy
 django-countries
