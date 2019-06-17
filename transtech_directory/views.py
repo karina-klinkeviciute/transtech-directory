@@ -43,23 +43,21 @@ class DirectoryCreateView(CreateView):
         contact_form = ContactInfoFormset(data=self.request.POST)
 
         for a_form in address_form:
-            if not a_form.data['{}-DELETE'.format(a_form.prefix)] and not a_form.is_valid():
+            if not a_form.is_valid():
                 return self.form_invalid(form)
         for c_form in contact_form:
-            if not c_form.data['{}-DELETE'.format(c_form.prefix)] and not c_form.is_valid():
+            if not c_form.is_valid():
                 return self.form_invalid(form)
 
         form.save()
         for a_form in address_form:
-            if not a_form.data['{}-DELETE'.format(a_form.prefix)]:
-                a_obj = a_form.instance
-                a_obj.directory = form.instance
-                a_obj.save()
+            a_obj = a_form.instance
+            a_obj.directory = form.instance
+            a_obj.save()
         for c_form in contact_form:
-            if not c_form.data['{}-DELETE'.format(c_form.prefix)]:
-                c_obj = c_form.instance
-                c_obj.directory = form.instance
-                c_obj.save()
+            c_obj = c_form.instance
+            c_obj.directory = form.instance
+            c_obj.save()
 
         self._slug = form.instance.slug
 
